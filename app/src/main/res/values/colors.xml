@@ -14,4 +14,6 @@
     <color name="rippleColor">#C4C4C4</color>
     <color name="toolbar_color_control_normal">#FF000000</color>
     <color name="toolbar_exercise_bg_color">#FFFFFF</color>
+    <color name="progress_gray_color">#D4DEE7</color>
+    <color name="timer_color">#FFFFFF</color>
 </resources>

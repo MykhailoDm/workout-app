@@ -6,8 +6,8 @@
             android:innerRadiusRatio="2.7"
             android:shape="ring"
             android:thicknessRatio="50.0"
-            android:useLevel="true">
-            <solid android:color="@color/colorAccent" />
+            android:useLevel="false">
+            <solid android:color="@color/progress_gray_color" />
         </shape>
     </item>
 </layer-list>
