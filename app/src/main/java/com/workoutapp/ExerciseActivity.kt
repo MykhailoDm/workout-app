@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import android.widget.Toast
+import com.workoutapp.const.Constants
 import com.workoutapp.databinding.ActivityExerciseBinding
+import com.workoutapp.model.ExerciseModel
 
 class ExerciseActivity : AppCompatActivity() {
 
@@ -16,6 +18,9 @@ class ExerciseActivity : AppCompatActivity() {
 
     private var exerciseTimer: CountDownTimer? = null
     private var exerciseProgress = 0
+
+    private var exerciseList: ArrayList<ExerciseModel>? = null
+    private var currentExercisePosition = -1
 
     companion object {
         private const val REST_MAX_TIME = 10000L
@@ -33,6 +38,9 @@ class ExerciseActivity : AppCompatActivity() {
         if (supportActionBar != null) {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
+
+        exerciseList = Constants.defaultExerciseList()
+
         binding?.toolbarExercise?.setNavigationOnClickListener {
             onBackPressed()
         }
@@ -41,6 +49,12 @@ class ExerciseActivity : AppCompatActivity() {
     }
 
     private fun setupRestView() {
+        binding?.flProgressBarRest?.visibility = View.VISIBLE
+        binding?.tvTitle?.visibility = View.VISIBLE
+        binding?.tvExerciseName?.visibility = View.INVISIBLE
+        binding?.flProgressBarExercise?.visibility = View.INVISIBLE
+        binding?.ivImage?.visibility = View.INVISIBLE
+
         if (restTimer != null) {
             restTimer?.cancel()
             restProgress = 0
@@ -60,6 +74,7 @@ class ExerciseActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
+                currentExercisePosition++
                 setupExerciseView()
             }
 
@@ -67,15 +82,20 @@ class ExerciseActivity : AppCompatActivity() {
     }
 
     private fun setupExerciseView() {
-        binding?.flProgressBar?.visibility = View.INVISIBLE
-        // TODO change to selection of exercises from list
-        binding?.tvTitle?.text = "Exercise Name"
+        binding?.flProgressBarRest?.visibility = View.INVISIBLE
+        binding?.tvTitle?.visibility = View.INVISIBLE
+        binding?.tvExerciseName?.visibility = View.VISIBLE
         binding?.flProgressBarExercise?.visibility = View.VISIBLE
+        binding?.ivImage?.visibility = View.VISIBLE
 
         if (exerciseTimer != null) {
             exerciseTimer?.cancel()
             exerciseProgress = 0
         }
+
+        val currentExercise = exerciseList!![currentExercisePosition]
+        binding?.ivImage?.setImageResource(currentExercise.image)
+        binding?.tvExerciseName?.text = currentExercise.name
 
         setExerciseProgressBar()
     }
@@ -91,11 +111,11 @@ class ExerciseActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                Toast.makeText(
-                    this@ExerciseActivity,
-                    "30 Seconds are over, let's go to rest.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                if (currentExercisePosition < exerciseList?.size!! - 1) {
+                    setupRestView()
+                } else {
+                    Toast.makeText(this@ExerciseActivity, "Congratulations! You have completed the workout.", Toast.LENGTH_SHORT).show()
+                }
             }
 
         }.start()

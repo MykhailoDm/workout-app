@@ -23,12 +23,12 @@
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/default_btn_text_size"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/flProgressBar"
+        app:layout_constraintBottom_toTopOf="@id/flProgressBarRest"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <FrameLayout
-        android:id="@+id/flProgressBar"
+        android:id="@+id/flProgressBarRest"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="10dp"
@@ -69,6 +69,30 @@
         </LinearLayout>
     </FrameLayout>
 
+    <ImageView
+        android:id="@+id/ivImage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_jumping_jacks"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/tvExerciseName"
+        app:layout_constraintTop_toBottomOf="@id/toolbarExercise" />
+
+    <TextView
+        android:id="@+id/tvExerciseName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorAccent"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivImage"
+        tools:text="ExerciseName"
+        tools:visibility="visible" />
+
     <FrameLayout
         android:id="@+id/flProgressBarExercise"
         android:layout_width="100dp"
@@ -79,7 +103,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbarExercise"
+        app:layout_constraintTop_toBottomOf="@id/tvExerciseName"
         tools:visibility="visible">
 
         <ProgressBar
