@@ -9,6 +9,8 @@ import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.workoutapp.adapter.ExerciseStatusAdapter
 import com.workoutapp.const.Constants
 import com.workoutapp.databinding.ActivityExerciseBinding
 import com.workoutapp.model.ExerciseModel
@@ -30,6 +32,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private var tts: TextToSpeech? = null
     private var player: MediaPlayer? = null
+
+    private var exerciseAdapter: ExerciseStatusAdapter? = null
 
     companion object {
         private const val REST_MAX_TIME = 10000L
@@ -59,6 +63,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
 
         setupRestView()
+
+        setupExerciseStatusRecyclerView()
     }
 
     private fun setupRestView() {
@@ -90,6 +96,16 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         setRestProgressBar()
     }
 
+    private fun setupExerciseStatusRecyclerView() {
+        binding?.rvExerciseStatus?.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+        exerciseList?.let {
+            exerciseAdapter = ExerciseStatusAdapter(it)
+            binding?.rvExerciseStatus?.adapter = exerciseAdapter
+        }
+    }
+
     private fun setRestProgressBar() {
         binding?.progressBar?.progress = restProgress
         restTimer = object : CountDownTimer(REST_MAX_TIME, REST_COUNT_DOWN_INTERVAL) {
@@ -102,6 +118,10 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
             override fun onFinish() {
                 currentExercisePosition++
+
+                exerciseList!![currentExercisePosition].isSelected = true
+                exerciseAdapter?.notifyItemChanged(currentExercisePosition)
+
                 setupExerciseView()
             }
 
@@ -142,6 +162,11 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             }
 
             override fun onFinish() {
+
+                exerciseList!![currentExercisePosition].isSelected = false
+                exerciseList!![currentExercisePosition].isCompleted = true
+                exerciseAdapter?.notifyItemChanged(currentExercisePosition)
+
                 if (currentExercisePosition < exerciseList?.size!! - 1) {
                     setupRestView()
                 } else {
