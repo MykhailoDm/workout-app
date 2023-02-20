@@ -1,5 +1,6 @@
 package com.workoutapp
 
+import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -163,14 +164,16 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
             override fun onFinish() {
 
-                exerciseList!![currentExercisePosition].isSelected = false
-                exerciseList!![currentExercisePosition].isCompleted = true
-                exerciseAdapter?.notifyItemChanged(currentExercisePosition)
-
                 if (currentExercisePosition < exerciseList?.size!! - 1) {
+                    exerciseList!![currentExercisePosition].isSelected = false
+                    exerciseList!![currentExercisePosition].isCompleted = true
+                    exerciseAdapter?.notifyItemChanged(currentExercisePosition)
+
                     setupRestView()
                 } else {
-                    Toast.makeText(this@ExerciseActivity, "Congratulations! You have completed the workout.", Toast.LENGTH_SHORT).show()
+                    finish()
+                    val intent = Intent(this@ExerciseActivity, FinishActivity::class.java)
+                    startActivity(intent)
                 }
             }
 

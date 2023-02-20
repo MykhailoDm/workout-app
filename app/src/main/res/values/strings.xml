@@ -5,4 +5,9 @@
     <string name="tv_exercise_message">GET READY FOR</string>
     <string name="upcoming_exercise_label">UPCOMING EXERCISE:</string>
     <string name="cd_exercise_image">Exercise Image</string>
+    <string name="text_exercise_end">END</string>
+    <string name="text_exercise_finish_congratulation">Congratulations!</string>
+    <string name="text_workout_finished">You have done the workout!</string>
+    <string name="text_finish_exercise">FINISH</string>
+    <string name="iv_action_done">Action Done Icon</string>
 </resources>

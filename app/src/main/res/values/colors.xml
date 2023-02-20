@@ -20,4 +20,6 @@
     <color name="text_exercise_item">#212121</color>
     <color name="bg_item_thin">#FFFFFFFF</color>
     <color name="text_exercise_item_completed">#FFFFFF</color>
+    <color name="btn_text_finish">#FFFFFF</color>
+    <color name="text_finish_congratulations">#212121</color>
 </resources>
