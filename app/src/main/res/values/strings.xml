@@ -4,4 +4,5 @@
     <string name="start_image_content_description">start image</string>
     <string name="tv_exercise_message">GET READY FOR</string>
     <string name="upcoming_exercise_label">UPCOMING EXERCISE:</string>
+    <string name="cd_exercise_image">Exercise Image</string>
 </resources>
