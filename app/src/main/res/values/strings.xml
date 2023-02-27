@@ -10,4 +10,8 @@
     <string name="text_workout_finished">You have done the workout!</string>
     <string name="text_finish_exercise">FINISH</string>
     <string name="iv_action_done">Action Done Icon</string>
+    <string name="tv_confirm_back">Are you sure?</string>
+    <string name="tv_explain_back_action">This will stop your workout. You\'ve come this far, are you sure you want to quit?</string>
+    <string name="btn_confirm_action_back">YES</string>
+    <string name="btn_deny_action_back">NO</string>
 </resources>
