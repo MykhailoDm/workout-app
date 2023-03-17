@@ -14,4 +14,10 @@
     <string name="tv_explain_back_action">This will stop your workout. You\'ve come this far, are you sure you want to quit?</string>
     <string name="btn_confirm_action_back">YES</string>
     <string name="btn_deny_action_back">NO</string>
+    <string name="tv_bmi_open">BMI</string>
+    <string name="tv_bmi_calculator">Calculator</string>
+    <string name="et_weight">WEIGHT (in kg)</string>
+    <string name="et_height">HEIGHT (in cm)</string>
+    <string name="tv_your_bmi">YOUR BMI</string>
+    <string name="btn_calculate_bmi">CALCULATE</string>
 </resources>
