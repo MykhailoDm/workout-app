@@ -20,4 +20,8 @@
     <string name="et_height">HEIGHT (in cm)</string>
     <string name="tv_your_bmi">YOUR BMI</string>
     <string name="btn_calculate_bmi">CALCULATE</string>
+    <string name="rb_metric_units">METRIC UNITS</string>
+    <string name="rb_us_units">US UNITS</string>
+    <string name="metric_unit_height_feet_hint">Feet</string>
+    <string name="us_units_weight_hint">WEIGHT (in pounds)</string>
 </resources>
