@@ -14,6 +14,7 @@ class BMIActivity : AppCompatActivity() {
     companion object {
         private const val METRIC_UNITS_VIEW = "METRIC_UNIT_VIEW" // Metric Unit View
         private const val US_UNITS_VIEW = "US_UNIT_VIEW" // US Unit View
+        private const val BMI_US_UNITS_MULTIPLIER = 703
     }
 
     private var binding: ActivityBmiBinding? = null
@@ -34,16 +35,7 @@ class BMIActivity : AppCompatActivity() {
         }
 
         binding?.btnCalculateUnits?.setOnClickListener {
-            if (areValidMetricUnits()) {
-                val heightValue: Float = binding?.etMetricUnitHeight?.text.toString().toFloat() / 100
-                val weightValue: Float = binding?.etMetricUnitWeight?.text.toString().toFloat()
-
-                val bmi = weightValue / (heightValue.pow(2))
-                displayBMIResult(bmi)
-            } else {
-                Toast.makeText(this@BMIActivity, "Please enter valid values for weight and height.",
-                    Toast.LENGTH_SHORT).show()
-            }
+            calculateUnits()
         }
 
         makeVisibleMetricUnitsView()
@@ -64,6 +56,53 @@ class BMIActivity : AppCompatActivity() {
             isValid = false
         } else if (binding?.etMetricUnitHeight?.text.toString().isEmpty()) {
             isValid = false
+        }
+
+        return isValid
+    }
+
+    private fun calculateUnits() {
+        if (currentVisibleView == METRIC_UNITS_VIEW) {
+            if (areValidMetricUnits()) {
+                val heightValue: Float = binding?.etMetricUnitHeight?.text.toString().toFloat() / 100
+                val weightValue: Float = binding?.etMetricUnitWeight?.text.toString().toFloat()
+
+                val bmi = weightValue / (heightValue.pow(2))
+                displayBMIResult(bmi)
+            } else {
+                Toast.makeText(this@BMIActivity, "Please enter valid values for weight and height.",
+                    Toast.LENGTH_SHORT).show()
+            }
+        } else if (currentVisibleView == US_UNITS_VIEW) {
+            if (areValidUsUnits()) {
+                val usUnitHeightValueFeet = binding?.etUsMetricUnitHeightFeet?.text.toString()
+                val usUnitHeightValueInch = binding?.etUsMetricUnitHeightInch?.text.toString()
+                val usUnitWeightValue = binding?.etUsMetricUnitWeight?.text.toString().toFloat()
+
+                val heightValue = usUnitHeightValueInch.toFloat() + usUnitHeightValueFeet.toFloat() * 12
+
+                val bmi = BMI_US_UNITS_MULTIPLIER * (usUnitWeightValue / heightValue.pow(2))
+                displayBMIResult(bmi)
+            } else {
+                Toast.makeText(this@BMIActivity, "Please enter valid values for weight and height.",
+                    Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun areValidUsUnits(): Boolean {
+        var isValid = true
+
+        when {
+            binding?.etUsMetricUnitWeight?.text.toString().isEmpty() -> {
+                isValid = false
+            }
+            binding?.etUsMetricUnitHeightFeet?.text.toString().isEmpty() -> {
+                isValid = false
+            }
+            binding?.etUsMetricUnitHeightInch?.text.toString().isEmpty() -> {
+                isValid = false
+            }
         }
 
         return isValid
