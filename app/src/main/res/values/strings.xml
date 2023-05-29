@@ -24,4 +24,6 @@
     <string name="rb_us_units">US UNITS</string>
     <string name="metric_unit_height_feet_hint">Feet</string>
     <string name="us_units_weight_hint">WEIGHT (in pounds)</string>
+    <string name="tv_history_label">History</string>
+    <string name="iv_history_content_description">Calendar Icon</string>
 </resources>
